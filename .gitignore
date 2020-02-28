@@ -1,4 +1,12 @@
+# Byte-compiled / optimized / DLL files
 __pycache__/
+*.py[cod]
+*$py.class
 
-venv
+# Environments
+.env
+venv/
+
+# Editor directories and files
 .idea
+.vscode
