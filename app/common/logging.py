@@ -7,7 +7,7 @@ from flask.logging import default_handler
 default_formatter = '%(asctime)s %(process)d,%(threadName)s %(filename)s:%(lineno)d [%(levelname)s] %(message)s'
 
 
-def install(app):
+def configure_logging(app):
     # handler = None
     if app.debug:
         handler = logging.StreamHandler(sys.stdout)
