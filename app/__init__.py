@@ -3,6 +3,7 @@ import logging
 from flask import Blueprint, Flask
 from werkzeug.utils import find_modules, import_string
 
+from app.common.errors import register_error_handlers
 from app.common.logging import configure_logging
 from config import config
 
@@ -15,6 +16,7 @@ def create_app(config_name):
 
     configure_logging(app)
     register_blueprints(app)
+    register_error_handlers(app)
 
     return app
 
