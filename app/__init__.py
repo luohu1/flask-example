@@ -1,7 +1,12 @@
-from flask import Flask
+import logging
+
+from flask import Blueprint, Flask
+from werkzeug.utils import find_modules, import_string
 
 from app.common.logging import configure_logging
 from config import config
+
+logger = logging.getLogger(__name__)
 
 
 def create_app(config_name):
@@ -9,11 +14,15 @@ def create_app(config_name):
     app.config.from_object(config[config_name])
 
     configure_logging(app)
-
-    from .views.index import app as index_blueprint
-    app.register_blueprint(index_blueprint, url_prefix='/')
-
-    from .views.auth import app as auth_blueprint
-    app.register_blueprint(auth_blueprint, url_prefix='/auth')
+    register_blueprints(app)
 
     return app
+
+
+def register_blueprints(app):
+    for name in find_modules('app.views'):
+        logger.debug('find modules: %s', name)
+        view = import_string(name)
+        blueprint = getattr(view, 'app', None)
+        if blueprint and isinstance(blueprint, Blueprint):
+            app.register_blueprint(blueprint)
