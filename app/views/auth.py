@@ -2,7 +2,7 @@
 from flask import Blueprint
 from flask_restful import Api, Resource
 
-app = Blueprint('auth', __name__)
+app = Blueprint('auth', __name__, url_prefix='/auth')
 api = Api(app)
 
 
