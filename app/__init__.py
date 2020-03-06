@@ -13,7 +13,7 @@ def create_app(config_name):
     from .views.index import app as index_blueprint
     app.register_blueprint(index_blueprint, url_prefix='/')
 
-    from .auth import app as auth_blueprint
+    from .views.auth import app as auth_blueprint
     app.register_blueprint(auth_blueprint, url_prefix='/auth')
 
     from .api import app as api_blueprint
