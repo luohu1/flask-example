@@ -16,7 +16,4 @@ def create_app(config_name):
     from .views.auth import app as auth_blueprint
     app.register_blueprint(auth_blueprint, url_prefix='/auth')
 
-    from .api import app as api_blueprint
-    app.register_blueprint(api_blueprint, url_prefix='/api')
-
     return app
