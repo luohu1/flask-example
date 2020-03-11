@@ -3,6 +3,8 @@ from flask import Blueprint, jsonify, request
 from flask_jwt_extended import create_access_token
 from flask_restful import Api, Resource
 
+from app.models.user import UserModel
+
 app = Blueprint('auth', __name__, url_prefix='/auth')
 api = Api(app)
 
@@ -17,8 +19,12 @@ class Login(Resource):
         if not username or not password:
             return jsonify({"msg": "Missing username/password parameter"})
 
-        access_token = create_access_token(identity=username)
-        return jsonify(access_token=access_token)
+        user = UserModel.query.filter_by(username=username).first_or_404()
+        if user:
+            access_token = create_access_token(identity=username)
+            return jsonify(access_token=access_token)
+
+        return jsonify({"msg": "User not found"})
 
 
 class Logout(Resource):

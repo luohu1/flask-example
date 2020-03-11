@@ -5,7 +5,7 @@ from werkzeug.utils import find_modules, import_string
 
 from app.common.errors import register_error_handlers
 from app.common.logging import configure_logging
-from app.extentions import jwt
+from app.extentions import jwt, db
 from config import config
 
 logger = logging.getLogger(__name__)
@@ -25,6 +25,7 @@ def create_app(config_name):
 
 def register_extentions(app):
     jwt.init_app(app)
+    db.init_app(app)
 
 
 def register_blueprints(app):

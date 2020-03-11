@@ -14,6 +14,10 @@ class ProductionConfig(Config):
 class DevelopmentConfig(Config):
     ENV = 'development'
     DEBUG = True
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///db.sqlite3'
+    SQLALCHEMY_TRACK_MODIFICATIONS = True
+    # SQLALCHEMY_ECHO = True
+    SQLALCHEMY_RECORD_QUERIES = False
 
 
 config = {
