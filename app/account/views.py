@@ -1,10 +1,7 @@
-from flask import Blueprint, jsonify, request
-from flask_restful import Api, Resource
+from flask import jsonify, request
+from flask_restful import Resource
 
-from app.models.user import UserModel
-
-app = Blueprint('users', __name__, url_prefix='/users')
-api = Api(app)
+from .models import UserModel
 
 
 class UserList(Resource):
@@ -26,7 +23,3 @@ class UserDetail(Resource):
     def get(self, name):
         user = UserModel.query.filter_by(username=name).first_or_404()
         return jsonify(data=user.to_dict())
-
-
-api.add_resource(UserList, '/')
-api.add_resource(UserDetail, '/<name>')

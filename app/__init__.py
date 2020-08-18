@@ -19,7 +19,7 @@ def create_app(config_name):
     register_extentions(app)
     register_error_handlers(app)
 
-    register_blueprints(app, ['core'])
+    register_blueprints(app, ['core', 'account'])
 
     return app
 
