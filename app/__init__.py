@@ -3,9 +3,9 @@ import logging
 from flask import Blueprint, Flask
 from werkzeug.utils import import_string
 
-from app.common.errors import register_error_handlers
-from app.common.logging import configure_logging
-from app.extentions import jwt, db
+from app.extentions import db, jwt
+from app.libs.errors import register_error_handlers
+from app.libs.logging import configure_logging
 from config import config
 
 logger = logging.getLogger(__name__)
